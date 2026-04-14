@@ -1,0 +1,45 @@
+{
+  "lib/catch_cake/state_machine.ex": {
+    "type": "main",
+    "alternate": "test/catch_cake/state_machine_test.exs"
+  },
+  "test/catch_cake/state_machine_test.exs": {
+    "type": "testMain",
+    "alternate": "lib/catch_cake/state_machine.ex"
+  },
+  "lib/catch_cake/*.ex": {
+    "type": "state_machine",
+    "alternate": "test/catch_cake/{}_test.exs",
+    "template": [
+      "defmodule CatchCake.{camelcase|capitalize|dot} do",
+      "end"
+    ]
+  },
+  "test/catch_cake/*_test.exs": {
+    "type": "testStatemachine",
+    "alternate": "lib/catch_cake/{}.ex",
+    "template": [
+      "defmodule CatchCake.{camelcase|capitalize|dot}Test do",
+      "  @moduledoc false",
+      "  use ExUnit.Case",
+      "  doctest CatchCake.{camelcase|capitalize|dot}",
+      "",
+      "  alias CatchCake.{camelcase|capitalize|dot}",
+      "",
+      "  test \"my test description\" do",
+      "    assert false",
+      "  end",
+      "end"
+    ]
+  },
+  "test/*_test.exs": {
+    "type": "test",
+    "alternate": "lib/{}.ex"
+  },
+  "mix.exs": {
+    "type": "mix"
+  },
+  "config/*.exs": {
+    "type": "config"
+  }
+}
