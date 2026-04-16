@@ -4,10 +4,28 @@ defmodule CatchCake.StateMachine.MixProject do
   def project do
     [
       app: :cc_statemachine,
-      version: "0.1.0",
+      dialyzer: [
+        plt_file: {:no_warn, "priv/plts/dialyzer.plt"},
+        plt_add_apps: [:mix, :ex_unit],
+        ignore_warnings: "dialyzer.ignore-warnings",
+        flags: [
+          # :unmatched_returns,
+          :error_handling,
+          :no_opaque
+        ]
+      ],
+      version: "0.0.1",
       elixir: "~> 1.18",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test,
+        "test.integration": :integration
+      ]
     ]
   end
 
